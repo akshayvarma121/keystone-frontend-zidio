@@ -8,6 +8,7 @@ import { SLACountdownBadge } from '../common/SLACountdownBadge';
 import { WorkOrderDetailModal } from '../workorders/WorkOrderDetailModal';
 import { useAuth } from '../../context/AuthContext';
 import type { WorkOrderStatus } from '../../types';
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
 
 export const TechnicianMobileView: React.FC = () => {
   const { user } = useAuth();
@@ -35,6 +36,16 @@ export const TechnicianMobileView: React.FC = () => {
 
   return (
     <div className="mx-auto flex max-w-md flex-col gap-4 sm:max-w-2xl">
+      <ViewGuideBanner
+        title="Technician Job Queue"
+        description="All jobs assigned to you are shown here. Use the action buttons on each card to update job progress in real time."
+        steps={[
+          { label: 'Start a Job', detail: 'Tap the Play ▶ button on any "Assigned" job card to move it to "In Progress" and begin work.' },
+          { label: 'Pause a Job', detail: 'Tap the Pause ⏸ button if you need to put a job on hold (e.g. waiting for parts).' },
+          { label: 'Complete a Job', detail: 'Tap the Checkmark ✓ button when the work is done. The job moves to "Completed" for manager review.' },
+          { label: 'View Details', detail: 'Tap any job card to open the full detail modal with description, SLA countdown, location, and activity timeline.' },
+        ]}
+      />
       <div className="card p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Today</p>
         <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">{activeJobs.length} active job{activeJobs.length === 1 ? '' : 's'}</h2>

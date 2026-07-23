@@ -4,6 +4,7 @@ import { Download, Gauge, Clock3, DollarSign, Timer } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import * as api from '../../services/api';
 import { StatCard } from '../common/StatCard';
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
 import type { Priority } from '../../types';
 
 const PRIORITY_COLORS: Record<Priority, string> = {
@@ -33,6 +34,16 @@ export const ReportsView: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-5">
+      <ViewGuideBanner
+        title="Analytics & Reports"
+        description="All charts and KPIs update automatically from real work order data. Use these reports to track team efficiency and SLA compliance."
+        steps={[
+          { label: 'KPI Cards', detail: 'The four metric cards at the top show real-time SLA compliance, average resolution time, cost per order, and active backlog.' },
+          { label: 'Time Range Filter', detail: 'Use the "30d / 90d / All" toggle to filter data by recent periods or view the full history.' },
+          { label: 'Category Breakdown', detail: 'The bar chart shows how many work orders fall under each service category (HVAC, Electrical, Plumbing, etc.).' },
+          { label: 'Export', detail: 'Click the Export button to download a summary report of the current data.' },
+        ]}
+      />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">Performance reports</h2>

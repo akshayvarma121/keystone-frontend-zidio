@@ -9,6 +9,7 @@ import { WorkOrderFormModal } from '../workorders/WorkOrderFormModal';
 import { WorkOrderDetailModal } from '../workorders/WorkOrderDetailModal';
 import { useAuth } from '../../context/AuthContext';
 import type { WorkOrderStatus } from '../../types';
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
 
 const TRACKER_STEPS: WorkOrderStatus[] = ['NEW', 'ASSIGNED', 'IN_PROGRESS', 'COMPLETED', 'CLOSED'];
 
@@ -54,6 +55,16 @@ export const CustomerPortalView: React.FC = () => {
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-5">
+      <ViewGuideBanner
+        title="Customer Service Portal"
+        description="Submit and track maintenance requests for your facility. You can see real-time status updates as your request moves through the pipeline."
+        steps={[
+          { label: 'Raise a Request', detail: 'Click the "+ Raise a request" button to submit a new maintenance ticket with priority, category, and description.' },
+          { label: 'Track Progress', detail: 'Each ticket shows a live progress tracker: New → Assigned → In Progress → Completed → Closed.' },
+          { label: 'View Details', detail: 'Click any ticket card to see the full timeline, assigned technician, SLA countdown, and activity log.' },
+          { label: 'Active vs Past', detail: 'Use the "Active / Past" tabs to filter between open requests and completed/cancelled ones.' },
+        ]}
+      />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">Service requests</h2>

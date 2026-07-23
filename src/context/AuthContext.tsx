@@ -100,6 +100,10 @@ function parseJwtToUser(token: string): User {
     const role: Role = (payload.role as Role) || 'MANAGER';
     const email = payload.sub || 'admin@keystone.com';
     const knownNames: Record<string, string> = {
+      'manager.sarah@keystone.com': 'Sarah Jenkins',
+      'dispatch.marcus@keystone.com': 'Marcus Vance',
+      'tech.david@keystone.com': 'David Reynolds',
+      'client.samantha@apex.com': 'Samantha Wright',
       'sarah.jenkins@keystone.com': 'Sarah Jenkins',
       'marcus.vance@keystone.com': 'Marcus Vance',
       'david.reynolds@keystone.com': 'David Reynolds',
@@ -159,9 +163,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.warn('Backend login unavailable, creating fallback session:', backendError.message);
         let role: Role = 'MANAGER';
         const em = email.toLowerCase();
-        if (em.includes('marcus') || em.includes('dispatcher') || em.includes('bob')) role = 'DISPATCHER';
-        else if (em.includes('david') || em.includes('tech') || em.includes('charlie')) role = 'TECHNICIAN';
-        else if (em.includes('samantha') || em.includes('apex') || em.includes('customer') || em.includes('dave')) role = 'CUSTOMER';
+        if (em.includes('dispatch') || em.includes('marcus') || em.includes('bob')) role = 'DISPATCHER';
+        else if (em.includes('tech') || em.includes('david') || em.includes('charlie')) role = 'TECHNICIAN';
+        else if (em.includes('client') || em.includes('samantha') || em.includes('apex') || em.includes('customer') || em.includes('dave')) role = 'CUSTOMER';
 
         const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
         const payload = btoa(JSON.stringify({
