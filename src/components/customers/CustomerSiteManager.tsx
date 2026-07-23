@@ -82,7 +82,7 @@ export const CustomerSiteManager: React.FC = () => {
       <span className={`rounded-md px-2 py-0.5 text-[11px] font-semibold ${c.tier === 'ENTERPRISE' ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300' : c.tier === 'PRIORITY' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>{c.tier}</span>
     ) },
     { key: 'manager', header: 'Account Manager', render: (c) => c.accountManager },
-    { key: 'sites', header: 'Sites', render: (c) => c.siteIds.length },
+    { key: 'sites', header: 'Sites', render: (c) => c.siteIds?.length ?? 0 },
     { key: 'contact', header: 'Contact', render: (c) => <span className="text-slate-500">{c.contactName}</span> },
     { key: 'action', header: '', render: () => <ChevronRight size={16} className="text-slate-300" /> },
   ];
@@ -92,7 +92,7 @@ export const CustomerSiteManager: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">Customers & Sites</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">{customers.length} customer accounts · {customers.reduce((s, c) => s + c.siteIds.length, 0)} sites</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{customers.length} customer accounts · {customers.reduce((s, c) => s + (c.siteIds?.length ?? 0), 0)} sites</p>
         </div>
         <button onClick={() => setNewCustomerOpen(true)} className="btn-primary">
           <Plus size={16} /> New customer
@@ -132,7 +132,7 @@ export const CustomerSiteManager: React.FC = () => {
                 <span className="rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-500 dark:text-slate-400">{site.siteType}</span>
               </div>
               <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-400"><MapPin size={11} /> {site.addressLine}, {site.city}, {site.state} {site.postalCode}</p>
-              <p className="mt-1 text-xs text-slate-400">{site.squareFootage.toLocaleString()} sq ft · Contact: {site.contactName}</p>
+              <p className="mt-1 text-xs text-slate-400">{(site.squareFootage ?? 0).toLocaleString()} sq ft · Contact: {site.contactName}</p>
             </div>
           ))}
           {sites.length === 0 && <p className="py-6 text-center text-sm text-slate-400">No sites mapped yet.</p>}

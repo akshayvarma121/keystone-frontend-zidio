@@ -151,7 +151,8 @@ export async function login(req: LoginRequest): Promise<LoginResponse> {
 // ============================================================================
 export async function getCustomers(): Promise<Customer[]> {
   const { data } = await apiClient.get('/api/customers');
-  return Array.isArray(data) ? data : (data.content ?? []);
+  const list = Array.isArray(data) ? data : (data.content ?? []);
+  return list.map((c: any) => ({ ...c, siteIds: c.siteIds || [] }));
 }
 
 export async function createCustomer(payload: Omit<Customer, 'id' | 'siteIds' | 'createdAt'>): Promise<Customer> {
