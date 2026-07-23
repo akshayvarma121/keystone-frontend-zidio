@@ -127,10 +127,13 @@ export interface WorkOrder {
   description: string;
   category: WorkOrderCategory;
   customerId: string;
+  customerName?: string;
   siteId: string;
+  siteName?: string;
   status: WorkOrderStatus;
   priority: Priority;
   assignedTechnicianId: string | null;
+  assignedTechnicianName?: string;
   createdAt: string;
   updatedAt: string;
   dueAt: string; // SLA deadline

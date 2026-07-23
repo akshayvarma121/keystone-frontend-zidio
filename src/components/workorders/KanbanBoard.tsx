@@ -9,7 +9,6 @@ import { StatusTabs, type StatusTabKey } from './StatusTabs';
 import { WorkOrderDetailModal } from './WorkOrderDetailModal';
 import { WorkOrderFormModal } from './WorkOrderFormModal';
 import { useAuth } from '../../context/AuthContext';
-import { getCustomer, getSite, getTechnician } from '../../mock/data';
 import type { WorkOrder, WorkOrderStatus, Priority } from '../../types';
 
 const COLUMNS: { key: WorkOrderStatus; label: string }[] = [
@@ -80,9 +79,9 @@ export const KanbanBoard: React.FC = () => {
   }
 
   function renderCard(wo: WorkOrder) {
-    const customer = getCustomer(wo.customerId);
-    const site = getSite(wo.siteId);
-    const tech = getTechnician(wo.assignedTechnicianId);
+    
+    
+    
     return (
       <div
         key={wo.id}
@@ -99,14 +98,14 @@ export const KanbanBoard: React.FC = () => {
           {permissions.canEditKanban && <GripVertical size={14} className="text-slate-300 opacity-0 group-hover:opacity-100" />}
         </div>
         <p className="mt-1 text-sm font-medium leading-snug text-slate-800 dark:text-slate-100 line-clamp-2">{wo.title}</p>
-        <p className="mt-1 text-xs text-slate-400 truncate">{customer?.name} · {site?.city}</p>
+        <p className="mt-1 text-xs text-slate-400 truncate">{wo.customerName} · {wo.siteName}</p>
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <PriorityBadge priority={wo.priority} />
           <SLACountdownBadge dueAt={wo.dueAt} status={wo.status} completedAt={wo.completedAt} compact />
         </div>
-        {tech && (
+        {wo.assignedTechnicianName && (
           <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-            <User2 size={12} /> {tech.name}
+            <User2 size={12} /> {wo.assignedTechnicianName}
           </div>
         )}
       </div>

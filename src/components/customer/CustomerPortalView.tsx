@@ -7,8 +7,7 @@ import { PriorityBadge } from '../common/PriorityBadge';
 import { SLACountdownBadge } from '../common/SLACountdownBadge';
 import { WorkOrderFormModal } from '../workorders/WorkOrderFormModal';
 import { WorkOrderDetailModal } from '../workorders/WorkOrderDetailModal';
-import { useAuth, currentCustomerRecord } from '../../context/AuthContext';
-import { getSite } from '../../mock/data';
+import { useAuth } from '../../context/AuthContext';
 import type { WorkOrderStatus } from '../../types';
 
 const TRACKER_STEPS: WorkOrderStatus[] = ['NEW', 'ASSIGNED', 'IN_PROGRESS', 'COMPLETED', 'CLOSED'];
@@ -38,15 +37,15 @@ const StatusTracker: React.FC<{ status: WorkOrderStatus }> = ({ status }) => {
 
 export const CustomerPortalView: React.FC = () => {
   const { user } = useAuth();
-  const customer = currentCustomerRecord(user);
+  
   const [createOpen, setCreateOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [tab, setTab] = useState<'active' | 'past'>('active');
 
   const { data: tickets = [], isLoading } = useQuery({
-    queryKey: ['work-orders', 'customer', customer?.id],
-    queryFn: () => api.getWorkOrders({ role: 'CUSTOMER', scopedUserId: customer?.id }),
-    enabled: !!customer,
+    queryKey: ['work-orders', 'customer', user.customerId],
+    queryFn: () => api.getWorkOrders({ role: 'CUSTOMER', scopedUserId: user.customerId }),
+    enabled: !!user.customerId,
   });
 
   const active = tickets.filter((t) => t.status !== 'CLOSED' && t.status !== 'CANCELLED');
@@ -58,7 +57,7 @@ export const CustomerPortalView: React.FC = () => {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">Service requests</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">{customer?.name}</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">{user.name}</p>
         </div>
         <button onClick={() => setCreateOpen(true)} className="btn-primary shrink-0">
           <Plus size={16} /> Raise a request
@@ -88,14 +87,14 @@ export const CustomerPortalView: React.FC = () => {
           </div>
         )}
         {shown.map((wo) => {
-          const site = getSite(wo.siteId);
+          
           return (
             <div key={wo.id} onClick={() => setSelectedId(wo.id)} className="card cursor-pointer p-4 hover:shadow-softer transition-shadow">
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <span className="font-mono text-[11px] text-slate-400">{wo.code}</span>
                   <h3 className="font-medium text-slate-800 dark:text-slate-100">{wo.title}</h3>
-                  <p className="mt-0.5 flex items-center gap-1 text-xs text-slate-400"><MapPin size={11} /> {site?.name}</p>
+                  <p className="mt-0.5 flex items-center gap-1 text-xs text-slate-400"><MapPin size={11} /> {wo.siteName}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1.5">
                   <StatusBadge status={wo.status} />

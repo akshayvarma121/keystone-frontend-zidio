@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { demoUsers } from '../mock/data';
-
 const KeystoneMark: React.FC = () => (
   <svg width="34" height="34" viewBox="0 0 100 100" className="shrink-0">
     <rect width="100" height="100" rx="22" fill="#4338ca" />
@@ -105,18 +103,50 @@ export const LoginPage: React.FC = () => {
             {error && <p className="rounded-lg bg-rose-50 dark:bg-rose-900/20 px-3 py-2 text-sm text-rose-600 dark:text-rose-300">{error}</p>}
 
             <button type="submit" className="btn-primary mt-1 w-full justify-center py-2.5" disabled={isLoading}>
-              {isLoading ? 'Signing in…' : 'Log in'} <ArrowRight size={15} />
+              {isLoading ? 'Connecting to live server…' : 'Log in'} <ArrowRight size={15} />
             </button>
+            {isLoading && (
+              <p className="mt-2 text-center text-xs text-amber-600 dark:text-amber-400 animate-pulse">
+                ⚡ Waking up live Render backend service… (Cold start takes ~45 seconds on first request)
+              </p>
+            )}
           </form>
 
-          <div className="mt-5 rounded-lg bg-slate-50 dark:bg-slate-800/60 p-3 text-xs text-slate-500 dark:text-slate-400">
-            <p className="font-semibold text-slate-600 dark:text-slate-300 mb-1">Demo accounts</p>
-            {demoUsers.map((u) => (
-              <p key={u.id} className="truncate">{u.role.charAt(0) + u.role.slice(1).toLowerCase()}: {u.email}</p>
-            ))}
-            <p className="mt-1 text-slate-400">Any password works in this preview build.</p>
-          </div>
+          <div className="mt-5 rounded-lg border border-indigo-100 bg-indigo-50/50 dark:border-indigo-900/50 dark:bg-indigo-900/20 p-4 text-xs text-slate-600 dark:text-slate-300">
+            <p className="font-semibold text-indigo-900 dark:text-indigo-100 mb-1">Live Database Credentials</p>
+            <p className="mb-2 text-slate-500">Click any user below to autofill email & password:</p>
+            <div className="space-y-2 font-medium">
+              <div className="rounded border border-indigo-200/60 p-2 dark:border-indigo-800/40 bg-white/60 dark:bg-slate-900/40">
+                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Seeded Database Users (Password: <code className="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">Password123!</code>)</p>
+                <div className="grid grid-cols-1 gap-1 text-indigo-600 dark:text-indigo-400">
+                  <button type="button" onClick={() => { setEmail('alice@keystone.local'); setPassword('Password123!'); }} className="text-left hover:underline">
+                    👔 Manager: <strong>alice@keystone.local</strong>
+                  </button>
+                  <button type="button" onClick={() => { setEmail('bob@keystone.local'); setPassword('Password123!'); }} className="text-left hover:underline">
+                    📻 Dispatcher: <strong>bob@keystone.local</strong>
+                  </button>
+                  <button type="button" onClick={() => { setEmail('charlie@keystone.local'); setPassword('Password123!'); }} className="text-left hover:underline">
+                    🔧 Technician: <strong>charlie@keystone.local</strong>
+                  </button>
+                  <button type="button" onClick={() => { setEmail('dave@acmecorp.com'); setPassword('Password123!'); }} className="text-left hover:underline">
+                    🏢 Customer: <strong>dave@acmecorp.com</strong>
+                  </button>
+                </div>
+              </div>
 
+              <div className="rounded border border-indigo-200/60 p-2 dark:border-indigo-800/40 bg-white/60 dark:bg-slate-900/40">
+                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Admin / Standard Accounts (Password: <code className="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">password</code>)</p>
+                <div className="grid grid-cols-1 gap-1 text-indigo-600 dark:text-indigo-400">
+                  <button type="button" onClick={() => { setEmail('admin@keystone.com'); setPassword('password'); }} className="text-left hover:underline">
+                    👑 Admin: <strong>admin@keystone.com</strong>
+                  </button>
+                  <button type="button" onClick={() => { setEmail('tech1@keystone.com'); setPassword('password'); }} className="text-left hover:underline">
+                    🛠️ Tech 1: <strong>tech1@keystone.com</strong>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <p className="mt-5 text-center text-sm text-slate-500 dark:text-slate-400">
             Don't have an account?{' '}
             <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">

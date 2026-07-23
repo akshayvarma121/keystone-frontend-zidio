@@ -7,8 +7,7 @@ import { StatusBadge } from '../common/StatusBadge';
 import { PriorityBadge } from '../common/PriorityBadge';
 import { SLACountdownBadge } from '../common/SLACountdownBadge';
 import * as api from '../../services/api';
-import { useAuth, currentTechnicianRecord } from '../../context/AuthContext';
-import { getCustomer, getSite, getTechnician, inventory } from '../../mock/data';
+import { useAuth } from '../../context/AuthContext';
 import type { WorkOrderStatus } from '../../types';
 
 interface Props {
@@ -65,7 +64,7 @@ export const WorkOrderDetailModal: React.FC<Props> = ({ workOrderId, onClose }) 
   const timeMutation = useMutation({
     mutationFn: () => {
       const techId = user.technicianId ?? wo?.assignedTechnicianId ?? '';
-      const techName = currentTechnicianRecord(user)?.name ?? getTechnician(wo?.assignedTechnicianId ?? null)?.name ?? user.name;
+      const techName = wo?.assignedTechnicianName ?? user.name;
       return api.logTime(workOrderId, techId, techName, timeMinutes, timeDesc || 'Time logged on job');
     },
     onSuccess: () => {
@@ -84,9 +83,9 @@ export const WorkOrderDetailModal: React.FC<Props> = ({ workOrderId, onClose }) 
     );
   }
 
-  const customer = getCustomer(wo.customerId);
-  const site = getSite(wo.siteId);
-  const tech = getTechnician(wo.assignedTechnicianId);
+  
+  
+  
   const isTerminal = wo.status === 'CLOSED' || wo.status === 'CANCELLED';
 
   const allowedNext = api.VALID_TRANSITIONS[wo.status].filter((s) => {
@@ -111,13 +110,13 @@ export const WorkOrderDetailModal: React.FC<Props> = ({ workOrderId, onClose }) 
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <Building2 size={14} /> {customer?.name ?? '—'}
+            <Building2 size={14} /> {wo?.customerName ?? '—'}
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <MapPin size={14} /> {site ? `${site.name}, ${site.city}` : '—'}
+            <MapPin size={14} /> {wo?.siteName ?? '—'}
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <User2 size={14} /> {tech?.name ?? 'Unassigned'}
+            <User2 size={14} /> {wo?.assignedTechnicianName ?? 'Unassigned'}
           </div>
           <div className="flex items-center gap-2">
             <PriorityBadge priority={wo.priority} />
@@ -244,9 +243,6 @@ export const WorkOrderDetailModal: React.FC<Props> = ({ workOrderId, onClose }) 
                   <label className="label">Inventory item</label>
                   <select className="input" value={partItem} onChange={(e) => setPartItem(e.target.value)}>
                     <option value="">Select item…</option>
-                    {inventory.map((i) => (
-                      <option key={i.id} value={i.id}>{i.name} (${i.unitCost.toFixed(2)}, {i.quantityOnHand} in stock)</option>
-                    ))}
                   </select>
                 </div>
                 <div className="w-full sm:w-24">

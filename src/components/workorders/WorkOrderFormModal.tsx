@@ -5,8 +5,7 @@ import { z } from 'zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from '../common/Modal';
 import * as api from '../../services/api';
-import { customers, sites } from '../../mock/data';
-import { useAuth, currentCustomerRecord } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import type { Priority, WorkOrderCategory } from '../../types';
 
 const CATEGORIES: WorkOrderCategory[] = [
@@ -34,8 +33,9 @@ interface Props {
 
 export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustomer }) => {
   const { user } = useAuth();
+  const customer = { id: user.customerId ?? '', name: user.name };
+  const lockedCustomer = user.role === 'CUSTOMER' ? customer : null;
   const queryClient = useQueryClient();
-  const lockedCustomer = lockCustomer ? currentCustomerRecord(user) : undefined;
 
   const {
     register,
@@ -52,20 +52,28 @@ export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustome
       category: 'GENERAL_MAINTENANCE',
       customerId: lockedCustomer?.id ?? '',
       siteId: '',
-      priority: lockCustomer ? 'MEDIUM' : 'MEDIUM',
+      priority: 'MEDIUM',
     },
   });
 
   const selectedCustomerId = watch('customerId');
-  const availableSites = useMemo(() => sites.filter((s) => s.customerId === selectedCustomerId), [selectedCustomerId]);
+  const availableSites = useMemo(() => {
+    const sites = [] as any[];
+    return sites.filter((s: any) => s.customerId === selectedCustomerId);
+  }, [selectedCustomerId]);
+
+  const siteId = watch('siteId');
+  const site = useMemo(() => {
+    const sites = [] as any[];
+    return sites.find((s: any) => s.id === siteId);
+  }, [siteId]);
 
   const mutation = useMutation({
     mutationFn: (values: FormValues) => {
-      const site = sites.find((s) => s.id === values.siteId);
       return api.createWorkOrder({
         ...values,
-        raisedBy: lockCustomer ? user.name : site?.contactName ?? user.name,
-        requestedByCustomer: !!lockCustomer,
+        raisedBy: lockedCustomer ? user.name : site?.contactName ?? user.name,
+        requestedByCustomer: !!lockedCustomer,
         actorName: user.name,
         actorRole: user.role,
       });
@@ -128,7 +136,7 @@ export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustome
                   {...field}
                 >
                   <option value="">Select customer…</option>
-                  {customers.map((c) => (
+                  {([].map as any)((c: any) => (
                     <option key={c.id} value={c.id}>{c.name}</option>
                   ))}
                 </select>
@@ -140,7 +148,7 @@ export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustome
             <label className="label" htmlFor="siteId">Site</label>
             <select id="siteId" className="input" disabled={!selectedCustomerId} {...register('siteId')}>
               <option value="">Select site…</option>
-              {availableSites.map((s) => (
+              {availableSites.map((s: any) => (
                 <option key={s.id} value={s.id}>{s.name} — {s.city}, {s.state}</option>
               ))}
             </select>

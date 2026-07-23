@@ -7,7 +7,6 @@ import { StatusBadge } from '../common/StatusBadge';
 import { PriorityBadge } from '../common/PriorityBadge';
 import { SLACountdownBadge } from '../common/SLACountdownBadge';
 import { useAuth } from '../../context/AuthContext';
-import { getCustomer, getSite } from '../../mock/data';
 import type { Technician, TechnicianStatus, WorkOrder } from '../../types';
 
 const STATUS_STYLES: Record<TechnicianStatus, { label: string; dot: string; text: string }> = {
@@ -129,8 +128,8 @@ export const DispatchView: React.FC = () => {
           <div className="max-h-72 overflow-y-auto flex flex-col gap-2">
             {unassigned.length === 0 && <p className="py-8 text-center text-sm text-slate-400">No unassigned work orders right now.</p>}
             {unassigned.map((wo) => {
-              const customer = getCustomer(wo.customerId);
-              const site = getSite(wo.siteId);
+              
+              
               return (
                 <label
                   key={wo.id}
@@ -146,7 +145,7 @@ export const DispatchView: React.FC = () => {
                       <span className="font-medium text-slate-700 dark:text-slate-200">{wo.title}</span>
                       <PriorityBadge priority={wo.priority} />
                     </div>
-                    <p className="text-xs text-slate-400">{wo.code} · {customer?.name} · {site?.city}</p>
+                    <p className="text-xs text-slate-400">{wo.code} · {wo.customerName} · {wo.siteName}</p>
                     <div className="mt-1 flex items-center gap-2">
                       <StatusBadge status={wo.status} />
                       <SLACountdownBadge dueAt={wo.dueAt} status={wo.status} compact />

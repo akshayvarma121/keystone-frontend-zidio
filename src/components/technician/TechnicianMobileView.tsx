@@ -6,21 +6,19 @@ import { StatusBadge } from '../common/StatusBadge';
 import { PriorityBadge } from '../common/PriorityBadge';
 import { SLACountdownBadge } from '../common/SLACountdownBadge';
 import { WorkOrderDetailModal } from '../workorders/WorkOrderDetailModal';
-import { useAuth, currentTechnicianRecord } from '../../context/AuthContext';
-import { getCustomer, getSite } from '../../mock/data';
+import { useAuth } from '../../context/AuthContext';
 import type { WorkOrderStatus } from '../../types';
 
 export const TechnicianMobileView: React.FC = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const techRecord = currentTechnicianRecord(user);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
 
   const { data: jobs = [], isLoading } = useQuery({
-    queryKey: ['work-orders', 'technician', techRecord?.id],
-    queryFn: () => api.getWorkOrders({ role: 'TECHNICIAN', scopedUserId: techRecord?.id }),
-    enabled: !!techRecord,
+    queryKey: ['work-orders', 'technician', user.technicianId],
+    queryFn: () => api.getWorkOrders({ role: 'TECHNICIAN', scopedUserId: user.technicianId }),
+    enabled: !!user.technicianId,
   });
 
   const activeJobs = jobs.filter((j) => j.status !== 'CLOSED' && j.status !== 'CANCELLED');
@@ -40,7 +38,7 @@ export const TechnicianMobileView: React.FC = () => {
       <div className="card p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Today</p>
         <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">{activeJobs.length} active job{activeJobs.length === 1 ? '' : 's'}</h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400">Signed in as {user.name} · {techRecord?.region ?? '—'}</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Signed in as {user.name}</p>
       </div>
 
       {actionError && (
@@ -59,8 +57,8 @@ export const TechnicianMobileView: React.FC = () => {
           </div>
         )}
         {activeJobs.map((wo) => {
-          const customer = getCustomer(wo.customerId);
-          const site = getSite(wo.siteId);
+          
+          
           return (
             <div key={wo.id} className="card p-4">
               <div className="flex items-start justify-between gap-2">
@@ -71,8 +69,8 @@ export const TechnicianMobileView: React.FC = () => {
                 <StatusBadge status={wo.status} />
               </div>
               <div className="mt-2 flex flex-col gap-1 text-xs text-slate-500 dark:text-slate-400">
-                <span className="flex items-center gap-1.5"><Building2 size={12} /> {customer?.name}</span>
-                <span className="flex items-center gap-1.5"><MapPin size={12} /> {site?.addressLine}, {site?.city}, {site?.state}</span>
+                <span className="flex items-center gap-1.5"><Building2 size={12} /> {wo.customerName}</span>
+                <span className="flex items-center gap-1.5"><MapPin size={12} /> {wo.siteName}</span>
               </div>
               <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                 <PriorityBadge priority={wo.priority} />
