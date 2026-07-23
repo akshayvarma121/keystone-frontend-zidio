@@ -120,14 +120,14 @@ export const LoginPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => { setEmail('alice@keystone.local'); setPassword('Password123!'); }}
-                className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 transition-all group"
+                className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-all group"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-semibold shrink-0">
-                  AV
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-semibold shrink-0">
+                  SJ
                 </span>
                 <div className="min-w-0">
-                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Alice Vance</p>
-                  <p className="text-[11px] text-slate-400 truncate">Operations Manager</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">Sarah Jenkins</p>
+                  <p className="text-[11px] text-slate-400 truncate">Operations Lead</p>
                 </div>
               </button>
 
@@ -137,11 +137,11 @@ export const LoginPage: React.FC = () => {
                 className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-sky-400 hover:bg-sky-50/50 dark:hover:bg-sky-900/20 transition-all group"
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 font-semibold shrink-0">
-                  BH
+                  MV
                 </span>
                 <div className="min-w-0">
-                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-sky-600 dark:group-hover:text-sky-400">Bob Harris</p>
-                  <p className="text-[11px] text-slate-400 truncate">Lead Dispatcher</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-sky-600 dark:group-hover:text-sky-400">Marcus Vance</p>
+                  <p className="text-[11px] text-slate-400 truncate">Chief Dispatcher</p>
                 </div>
               </button>
 
@@ -151,11 +151,11 @@ export const LoginPage: React.FC = () => {
                 className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-amber-400 hover:bg-amber-50/50 dark:hover:bg-amber-900/20 transition-all group"
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold shrink-0">
-                  CM
+                  DR
                 </span>
                 <div className="min-w-0">
-                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-amber-600 dark:group-hover:text-amber-400">Charlie Miller</p>
-                  <p className="text-[11px] text-slate-400 truncate">Field Technician</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-amber-600 dark:group-hover:text-amber-400">David Reynolds</p>
+                  <p className="text-[11px] text-slate-400 truncate">Senior Field Specialist</p>
                 </div>
               </button>
 
@@ -165,11 +165,11 @@ export const LoginPage: React.FC = () => {
                 className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-rose-400 hover:bg-rose-50/50 dark:hover:bg-rose-900/20 transition-all group"
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 font-semibold shrink-0">
-                  DS
+                  SW
                 </span>
                 <div className="min-w-0">
-                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-rose-600 dark:group-hover:text-rose-400">Dave Sterling</p>
-                  <p className="text-[11px] text-slate-400 truncate">Client Account Manager</p>
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-rose-600 dark:group-hover:text-rose-400">Samantha Wright</p>
+                  <p className="text-[11px] text-slate-400 truncate">Client Portal Manager</p>
                 </div>
               </button>
             </div>

@@ -98,12 +98,23 @@ function parseJwtToUser(token: string): User {
     );
     const payload = JSON.parse(jsonPayload);
     const role: Role = (payload.role as Role) || 'MANAGER';
+    const email = payload.sub || 'admin@keystone.com';
+    const knownNames: Record<string, string> = {
+      'alice@keystone.local': 'Sarah Jenkins',
+      'bob@keystone.local': 'Marcus Vance',
+      'charlie@keystone.local': 'David Reynolds',
+      'dave@acmecorp.com': 'Samantha Wright',
+      'admin@keystone.com': 'Alexander Cross',
+      'tech1@keystone.com': 'Michael Chang',
+    };
+    const name = knownNames[email] || (email.includes('@') ? email.split('@')[0].replace('.', ' ') : 'Operations Lead');
+
     return {
       id: payload.userId || '33333333-3333-3333-3333-333333333331',
-      name: payload.sub ? payload.sub.split('@')[0] : 'Manager User',
-      email: payload.sub || 'admin@keystone.com',
+      name,
+      email,
       role,
-      avatarColor: role === 'TECHNICIAN' ? 'bg-emerald-500' : 'bg-indigo-500',
+      avatarColor: role === 'TECHNICIAN' ? 'bg-emerald-500' : 'bg-blue-600',
       technicianId: role === 'TECHNICIAN' ? (payload.userId || '33333333-3333-3333-3333-333333333333') : undefined,
       customerId: role === 'CUSTOMER' ? (payload.customerId || '11111111-1111-1111-1111-111111111111') : undefined,
     };
