@@ -7,9 +7,9 @@ export const GuideView: React.FC = () => {
   return (
     <div className="flex flex-col gap-6 max-w-5xl mx-auto">
       {/* Top Header Card */}
-      <div className="card p-6 border-indigo-100 dark:border-indigo-900/40 bg-gradient-to-r from-indigo-50/50 via-white to-sky-50/50 dark:from-indigo-950/20 dark:via-slate-900 dark:to-sky-950/20">
+      <div className="card p-6 border-blue-100 dark:border-blue-900/40 bg-gradient-to-r from-blue-50/50 via-white to-sky-50/50 dark:from-blue-950/20 dark:via-slate-900 dark:to-sky-950/20">
         <div className="flex items-center gap-3">
-          <div className="rounded-xl bg-indigo-600 p-3 text-white shadow-soft">
+          <div className="rounded-xl bg-blue-600 p-3 text-white shadow-soft">
             <BookOpen size={24} />
           </div>
           <div>
@@ -23,7 +23,7 @@ export const GuideView: React.FC = () => {
             onClick={() => setTab('roles')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 transition-all ${
               tab === 'roles'
-                ? 'bg-indigo-600 text-white font-semibold shadow-soft'
+                ? 'bg-blue-600 text-white font-semibold shadow-soft'
                 : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -33,7 +33,7 @@ export const GuideView: React.FC = () => {
             onClick={() => setTab('lifecycle')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 transition-all ${
               tab === 'lifecycle'
-                ? 'bg-indigo-600 text-white font-semibold shadow-soft'
+                ? 'bg-blue-600 text-white font-semibold shadow-soft'
                 : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -43,7 +43,7 @@ export const GuideView: React.FC = () => {
             onClick={() => setTab('dispatch')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 transition-all ${
               tab === 'dispatch'
-                ? 'bg-indigo-600 text-white font-semibold shadow-soft'
+                ? 'bg-blue-600 text-white font-semibold shadow-soft'
                 : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -53,7 +53,7 @@ export const GuideView: React.FC = () => {
             onClick={() => setTab('tech')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 transition-all ${
               tab === 'tech'
-                ? 'bg-indigo-600 text-white font-semibold shadow-soft'
+                ? 'bg-blue-600 text-white font-semibold shadow-soft'
                 : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >
@@ -63,7 +63,7 @@ export const GuideView: React.FC = () => {
             onClick={() => setTab('customers')}
             className={`flex items-center gap-1.5 rounded-lg px-3.5 py-2 transition-all ${
               tab === 'customers'
-                ? 'bg-indigo-600 text-white font-semibold shadow-soft'
+                ? 'bg-blue-600 text-white font-semibold shadow-soft'
                 : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
             }`}
           >

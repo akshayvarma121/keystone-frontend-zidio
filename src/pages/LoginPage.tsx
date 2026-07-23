@@ -4,7 +4,7 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 const KeystoneMark: React.FC = () => (
   <svg width="34" height="34" viewBox="0 0 100 100" className="shrink-0">
-    <rect width="100" height="100" rx="22" fill="#4338ca" />
+    <rect width="100" height="100" rx="22" fill="#2563eb" />
     <path d="M30 24 V76 M30 50 L68 24 M42 40 L70 76" stroke="white" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 );

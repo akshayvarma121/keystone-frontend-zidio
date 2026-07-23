@@ -113,14 +113,27 @@ export const KanbanBoard: React.FC = () => {
     );
   }
 
+  const searchRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="flex flex-col gap-4">
       <ViewGuideBanner
         title="Work Order Management & Pipeline"
         description="Filter, inspect, drag, and update work orders through active lifecycle stages."
         steps={[
-          { label: 'Filter & Search', detail: 'Use search bar and priority dropdown to filter jobs by title, customer, or urgency.' },
-          { label: 'Drag & Drop Progression', detail: 'Drag cards between columns (NEW -> ASSIGNED -> IN_PROGRESS -> COMPLETED -> CLOSED) to transition status.' },
+          { label: 'Filter & Search', detail: 'Use search bar (press Ctrl+K) and priority dropdown to filter jobs.' },
+          { label: 'Drag & Drop Progression', detail: 'Drag cards between columns (NEW -> ASSIGNED -> IN_PROGRESS -> COMPLETED -> CLOSED).' },
           { label: 'Click to Manage Details', detail: 'Click any work order card to open full details, log inventory parts, or record labor hours.' }
         ]}
       />
@@ -129,11 +142,15 @@ export const KanbanBoard: React.FC = () => {
           <div className="relative w-full max-w-xs">
             <Search size={15} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
+              ref={searchRef}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search work orders…"
-              className="input pl-8"
+              className="input pl-8 pr-14"
             />
+            <kbd className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 rounded border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[10px] font-mono text-slate-400">
+              Ctrl K
+            </kbd>
           </div>
           <select value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value as Priority | 'ALL')} className="input max-w-[9.5rem]">
             {PRIORITY_FILTERS.map((p) => (
