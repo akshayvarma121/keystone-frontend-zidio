@@ -7,6 +7,7 @@ import { Plus, Building2, MapPin, ChevronRight, Mail, Phone } from 'lucide-react
 import * as api from '../../services/api';
 import { Modal } from '../common/Modal';
 import { DataTable, type Column } from '../common/DataTable';
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
 import type { Customer, Site } from '../../types';
 
 const TIERS = ['STANDARD', 'PRIORITY', 'ENTERPRISE'] as const;
@@ -89,6 +90,15 @@ export const CustomerSiteManager: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-5">
+      <ViewGuideBanner
+        title="Customer Accounts & Building Facilities"
+        description="Register enterprise client accounts and map individual facility site records."
+        steps={[
+          { label: 'Register Accounts', detail: 'Click New customer to add enterprise client profiles and account tier levels.' },
+          { label: 'Map Facility Sites', detail: 'Click any customer row to view building sites, addresses, and site contact details.' },
+          { label: 'Add Building Locations', detail: 'Inside customer site manager, click Add site to map new facility addresses.' }
+        ]}
+      />
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">Customers & Sites</h2>

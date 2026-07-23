@@ -7,6 +7,7 @@ import { StatusBadge } from '../common/StatusBadge';
 import { PriorityBadge } from '../common/PriorityBadge';
 import { SLACountdownBadge } from '../common/SLACountdownBadge';
 import { useAuth } from '../../context/AuthContext';
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
 import type { Technician, TechnicianStatus, WorkOrder } from '../../types';
 
 const STATUS_STYLES: Record<TechnicianStatus, { label: string; dot: string; text: string }> = {
@@ -46,6 +47,15 @@ export const DispatchView: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-5">
+      <ViewGuideBanner
+        title="Dispatching & Technician Scheduling"
+        description="Match open work orders with available technicians based on skill certifications."
+        steps={[
+          { label: 'Unassigned Jobs', detail: 'Open work orders in NEW or ASSIGNED status are flagged for dispatching.' },
+          { label: 'Skill Matching', detail: 'Click Assign technician to see qualified candidates matched by skills (HVAC, Electrical, Plumbing).' },
+          { label: 'Confirm & Notify', detail: 'Assigning a technician transitions the job state and delivers it to their workspace.' }
+        ]}
+      />
       <div>
         <h2 className="font-display text-lg font-semibold text-slate-800 dark:text-slate-100">Technician availability</h2>
         <p className="text-sm text-slate-500 dark:text-slate-400">Assign or reassign technicians to open work orders across all sites.</p>

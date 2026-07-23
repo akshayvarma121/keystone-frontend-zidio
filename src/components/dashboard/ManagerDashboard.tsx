@@ -26,6 +26,8 @@ const PRIORITY_COLORS: Record<Priority, string> = {
   LOW: '#94a3b8',
 };
 
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
+
 export const ManagerDashboard: React.FC = () => {
   const { data: summary, isLoading } = useQuery({
     queryKey: ['reports-summary'],
@@ -49,6 +51,15 @@ export const ManagerDashboard: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-5">
+      <ViewGuideBanner
+        title="Dashboard & Metrics Overview"
+        description="Monitor real-time SLA compliance, status counts, technician loads, and active alerts."
+        steps={[
+          { label: 'Top Metrics', detail: 'View open work orders, SLA percentage, breached targets, and monthly resolutions.' },
+          { label: 'Status & Priority Mix', detail: 'Inspect the bar and pie charts to see workload distribution across NEW, IN_PROGRESS, and CLOSED states.' },
+          { label: 'Active SLA Alerts', detail: 'Check bottom alert cards for jobs nearing SLA breach. Click Work Orders in sidebar to reassign or escalate.' }
+        ]}
+      />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Open Work Orders" value={summary.openWorkOrders} icon={<ClipboardList size={18} />} accent="indigo" sub={`${summary.totalWorkOrders} total`} />
         <StatCard label="SLA Compliance" value={`${summary.slaComplianceRate}%`} icon={<Gauge size={18} />} accent={summary.slaComplianceRate >= 85 ? 'emerald' : 'amber'} sub={`${totalSlaTracked} tracked`} />

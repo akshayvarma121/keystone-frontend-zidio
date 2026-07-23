@@ -9,6 +9,7 @@ import { StatusTabs, type StatusTabKey } from './StatusTabs';
 import { WorkOrderDetailModal } from './WorkOrderDetailModal';
 import { WorkOrderFormModal } from './WorkOrderFormModal';
 import { useAuth } from '../../context/AuthContext';
+import { ViewGuideBanner } from '../common/ViewGuideBanner';
 import type { WorkOrder, WorkOrderStatus, Priority } from '../../types';
 
 const COLUMNS: { key: WorkOrderStatus; label: string }[] = [
@@ -114,6 +115,15 @@ export const KanbanBoard: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
+      <ViewGuideBanner
+        title="Work Order Management & Pipeline"
+        description="Filter, inspect, drag, and update work orders through active lifecycle stages."
+        steps={[
+          { label: 'Filter & Search', detail: 'Use search bar and priority dropdown to filter jobs by title, customer, or urgency.' },
+          { label: 'Drag & Drop Progression', detail: 'Drag cards between columns (NEW -> ASSIGNED -> IN_PROGRESS -> COMPLETED -> CLOSED) to transition status.' },
+          { label: 'Click to Manage Details', detail: 'Click any work order card to open full details, log inventory parts, or record labor hours.' }
+        ]}
+      />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-1 items-center gap-2">
           <div className="relative w-full max-w-xs">
