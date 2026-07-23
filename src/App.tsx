@@ -13,7 +13,7 @@ import { ReportsView } from './components/reports/ReportsView';
 import { GuideView } from './components/guide/GuideView';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
+
 import { ForbiddenPage } from './pages/ForbiddenPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { RequireAuth } from './routes/RequireAuth';
@@ -128,7 +128,7 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+
       <Route
         path="/app"
         element={

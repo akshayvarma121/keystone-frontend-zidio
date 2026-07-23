@@ -114,88 +114,29 @@ export const LoginPage: React.FC = () => {
 
           <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50/40 dark:border-blue-900/40 dark:bg-blue-950/20 p-4 text-xs">
             <p className="font-semibold text-slate-800 dark:text-slate-100 mb-0.5">Demo Account Selector</p>
-            <p className="mb-3 text-slate-500 dark:text-slate-400">Select a team member to pre-fill unique email and password:</p>
+            <p className="mb-3 text-slate-500 dark:text-slate-400">Pick a role to auto-fill credentials:</p>
             
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              <button
-                type="button"
-                onClick={() => { setEmail('sarah@keystone.io'); setPassword('manage123'); }}
-                className="flex items-start gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-blue-500 hover:shadow-sm transition-all group"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-semibold shrink-0">
-                  SJ
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">Sarah Jenkins</p>
-                    <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 rounded">Manager</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">sarah@keystone.io</p>
-                  <p className="text-[10px] font-mono text-slate-400 mt-1">pwd: <span className="text-slate-600 dark:text-slate-300 font-semibold">manage123</span></p>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => { setEmail('dispatch@keystone.io'); setPassword('route456'); }}
-                className="flex items-start gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-sky-500 hover:shadow-sm transition-all group"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 font-semibold shrink-0">
-                  MV
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-sky-600 dark:group-hover:text-sky-400">Marcus Vance</p>
-                    <span className="text-[10px] font-semibold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 px-1.5 py-0.5 rounded">Dispatcher</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">dispatch@keystone.io</p>
-                  <p className="text-[10px] font-mono text-slate-400 mt-1">pwd: <span className="text-slate-600 dark:text-slate-300 font-semibold">route456</span></p>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => { setEmail('fieldops@keystone.io'); setPassword('wrench789'); }}
-                className="flex items-start gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-emerald-500 hover:shadow-sm transition-all group"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold shrink-0">
-                  DR
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400">David Reynolds</p>
-                    <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-1.5 py-0.5 rounded">Technician</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">fieldops@keystone.io</p>
-                  <p className="text-[10px] font-mono text-slate-400 mt-1">pwd: <span className="text-slate-600 dark:text-slate-300 font-semibold">wrench789</span></p>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => { setEmail('samantha@apexhq.com'); setPassword('tenant321'); }}
-                className="flex items-start gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-purple-500 hover:shadow-sm transition-all group"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-semibold shrink-0">
-                  SW
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-purple-600 dark:group-hover:text-purple-400">Samantha Wright</p>
-                    <span className="text-[10px] font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-1.5 py-0.5 rounded">Customer</span>
-                  </div>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">samantha@apexhq.com</p>
-                  <p className="text-[10px] font-mono text-slate-400 mt-1">pwd: <span className="text-slate-600 dark:text-slate-300 font-semibold">tenant321</span></p>
-                </div>
-              </button>
-            </div>
+            <select
+              className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer"
+              defaultValue=""
+              onChange={(e) => {
+                const accounts: Record<string, { email: string; password: string }> = {
+                  manager: { email: 'sarah@keystone.io', password: 'manage123' },
+                  dispatcher: { email: 'dispatch@keystone.io', password: 'route456' },
+                  technician: { email: 'fieldops@keystone.io', password: 'wrench789' },
+                  customer: { email: 'samantha@apexhq.com', password: 'tenant321' },
+                };
+                const picked = accounts[e.target.value];
+                if (picked) { setEmail(picked.email); setPassword(picked.password); }
+              }}
+            >
+              <option value="" disabled>— Select a demo account —</option>
+              <option value="manager">🔵 Sarah Jenkins — Manager</option>
+              <option value="dispatcher">🟦 Marcus Vance — Dispatcher</option>
+              <option value="technician">🟢 David Reynolds — Technician</option>
+              <option value="customer">🟣 Samantha Wright — Customer</option>
+            </select>
           </div>
-          <p className="mt-5 text-center text-sm text-slate-500 dark:text-slate-400">
-            Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">
-              Register
-            </Link>
-          </p>
         </div>
       </div>
     </div>
