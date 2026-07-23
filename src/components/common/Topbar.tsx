@@ -98,10 +98,21 @@ export const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) 
 
         <button
           onClick={toggleTheme}
-          aria-label="Toggle dark mode"
-          className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+          aria-label="Toggle light or dark mode"
+          title="Switch theme"
+          className="flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
         >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          {theme === 'dark' ? (
+            <>
+              <Sun size={14} className="text-amber-500" />
+              <span className="hidden sm:inline">Light Mode</span>
+            </>
+          ) : (
+            <>
+              <Moon size={14} className="text-indigo-600" />
+              <span className="hidden sm:inline">Dark Mode</span>
+            </>
+          )}
         </button>
 
         <div className="relative" ref={notifRef}>
