@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, Radio, Wrench, Building2, UserCheck } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 const KeystoneMark: React.FC = () => (
   <svg width="34" height="34" viewBox="0 0 100 100" className="shrink-0">
@@ -112,39 +112,66 @@ export const LoginPage: React.FC = () => {
             )}
           </form>
 
-          <div className="mt-5 rounded-lg border border-indigo-100 bg-indigo-50/50 dark:border-indigo-900/50 dark:bg-indigo-900/20 p-4 text-xs text-slate-600 dark:text-slate-300">
-            <p className="font-semibold text-indigo-900 dark:text-indigo-100 mb-1">Quick Access Accounts</p>
-            <p className="mb-2 text-slate-500">Select any role below to pre-fill credentials:</p>
-            <div className="space-y-2 font-medium">
-              <div className="rounded border border-indigo-200/60 p-2 dark:border-indigo-800/40 bg-white/60 dark:bg-slate-900/40">
-                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Seeded Database Users (Password: <code className="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">Password123!</code>)</p>
-                <div className="grid grid-cols-1 gap-1 text-indigo-600 dark:text-indigo-400">
-                  <button type="button" onClick={() => { setEmail('alice@keystone.local'); setPassword('Password123!'); }} className="text-left hover:underline flex items-center gap-1.5">
-                    <ShieldCheck size={13} /> Manager: <strong>alice@keystone.local</strong>
-                  </button>
-                  <button type="button" onClick={() => { setEmail('bob@keystone.local'); setPassword('Password123!'); }} className="text-left hover:underline flex items-center gap-1.5">
-                    <Radio size={13} /> Dispatcher: <strong>bob@keystone.local</strong>
-                  </button>
-                  <button type="button" onClick={() => { setEmail('charlie@keystone.local'); setPassword('Password123!'); }} className="text-left hover:underline flex items-center gap-1.5">
-                    <Wrench size={13} /> Technician: <strong>charlie@keystone.local</strong>
-                  </button>
-                  <button type="button" onClick={() => { setEmail('dave@acmecorp.com'); setPassword('Password123!'); }} className="text-left hover:underline flex items-center gap-1.5">
-                    <Building2 size={13} /> Customer: <strong>dave@acmecorp.com</strong>
-                  </button>
+          <div className="mt-5 rounded-xl border border-indigo-100 bg-indigo-50/40 dark:border-indigo-900/40 dark:bg-indigo-950/20 p-4 text-xs">
+            <p className="font-semibold text-slate-800 dark:text-slate-100 mb-0.5">Demo Account Selector</p>
+            <p className="mb-3 text-slate-500 dark:text-slate-400">Select a team member profile to auto-fill sign-in credentials:</p>
+            
+            <div className="grid gap-2 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => { setEmail('alice@keystone.local'); setPassword('Password123!'); }}
+                className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 transition-all group"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-semibold shrink-0">
+                  AV
+                </span>
+                <div className="min-w-0">
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Alice Vance</p>
+                  <p className="text-[11px] text-slate-400 truncate">Operations Manager</p>
                 </div>
-              </div>
+              </button>
 
-              <div className="rounded border border-indigo-200/60 p-2 dark:border-indigo-800/40 bg-white/60 dark:bg-slate-900/40">
-                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Admin / Standard Accounts (Password: <code className="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">password</code>)</p>
-                <div className="grid grid-cols-1 gap-1 text-indigo-600 dark:text-indigo-400">
-                  <button type="button" onClick={() => { setEmail('admin@keystone.com'); setPassword('password'); }} className="text-left hover:underline flex items-center gap-1.5">
-                    <UserCheck size={13} /> Admin: <strong>admin@keystone.com</strong>
-                  </button>
-                  <button type="button" onClick={() => { setEmail('tech1@keystone.com'); setPassword('password'); }} className="text-left hover:underline flex items-center gap-1.5">
-                    <Wrench size={13} /> Tech 1: <strong>tech1@keystone.com</strong>
-                  </button>
+              <button
+                type="button"
+                onClick={() => { setEmail('bob@keystone.local'); setPassword('Password123!'); }}
+                className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-sky-400 hover:bg-sky-50/50 dark:hover:bg-sky-900/20 transition-all group"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 font-semibold shrink-0">
+                  BH
+                </span>
+                <div className="min-w-0">
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-sky-600 dark:group-hover:text-sky-400">Bob Harris</p>
+                  <p className="text-[11px] text-slate-400 truncate">Lead Dispatcher</p>
                 </div>
-              </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setEmail('charlie@keystone.local'); setPassword('Password123!'); }}
+                className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-amber-400 hover:bg-amber-50/50 dark:hover:bg-amber-900/20 transition-all group"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold shrink-0">
+                  CM
+                </span>
+                <div className="min-w-0">
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-amber-600 dark:group-hover:text-amber-400">Charlie Miller</p>
+                  <p className="text-[11px] text-slate-400 truncate">Field Technician</p>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setEmail('dave@acmecorp.com'); setPassword('Password123!'); }}
+                className="flex items-center gap-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 text-left hover:border-rose-400 hover:bg-rose-50/50 dark:hover:bg-rose-900/20 transition-all group"
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 font-semibold shrink-0">
+                  DS
+                </span>
+                <div className="min-w-0">
+                  <p className="font-semibold text-slate-800 dark:text-slate-100 truncate group-hover:text-rose-600 dark:group-hover:text-rose-400">Dave Sterling</p>
+                  <p className="text-[11px] text-slate-400 truncate">Client Account Manager</p>
+                </div>
+              </button>
             </div>
           </div>
           <p className="mt-5 text-center text-sm text-slate-500 dark:text-slate-400">
