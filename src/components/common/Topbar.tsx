@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Moon, Sun, Menu, Bell, LogOut, HelpCircle } from 'lucide-react';
+import { Moon, Sun, Menu, Bell, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { PlatformGuideModal } from './PlatformGuideModal';
 import type { Role } from '../../types';
 
 const ROLE_LABELS: Record<Role, string> = {
@@ -32,7 +31,6 @@ export const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) 
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [notifOpen, setNotifOpen] = useState(false);
-  const [guideOpen, setGuideOpen] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,16 +60,6 @@ export const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) 
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
-        <button
-          onClick={() => setGuideOpen(true)}
-          aria-label="Open User Guide"
-          title="User Guide & Workflow Tour"
-          className="flex items-center gap-1.5 rounded-lg border border-indigo-200 dark:border-indigo-800/60 bg-indigo-50/60 dark:bg-indigo-900/30 px-3 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors"
-        >
-          <HelpCircle size={14} />
-          <span className="hidden md:inline">Platform Guide</span>
-        </button>
-
         <button
           onClick={toggleTheme}
           aria-label="Toggle light or dark mode"
@@ -139,8 +127,6 @@ export const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) 
           <LogOut size={18} />
         </button>
       </div>
-
-      <PlatformGuideModal open={guideOpen} onClose={() => setGuideOpen(false)} />
     </header>
   );
 };
