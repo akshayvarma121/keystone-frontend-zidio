@@ -22,7 +22,7 @@ const ROLE_BADGE_STYLES: Record<Role, string> = {
 const KeystoneMark: React.FC = () => (
   <svg width="30" height="30" viewBox="0 0 100 100" className="shrink-0">
     <rect width="100" height="100" rx="22" fill="#4338ca" />
-    <path d="M30 70 L50 25 L70 70 M38 55 L62 55" stroke="white" strokeWidth="8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M30 24 V76 M30 50 L68 24 M42 40 L70 76" stroke="white" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 );
 
