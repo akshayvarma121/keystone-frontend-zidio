@@ -46,19 +46,19 @@ export const LoginPage: React.FC = () => {
         </Link>
 
         <div className="card p-6 sm:p-8">
-          <h1 className="font-display text-xl font-semibold text-slate-900 dark:text-slate-50">Welcome back</h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Sign in to access your Keystone workspace.</p>
+          <h1 className="font-display text-xl font-semibold text-slate-900 dark:text-slate-50">Sign in to Keystone</h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Access your workspace to manage facilities, dispatch technicians, and track active work orders.</p>
 
           <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
             <div>
-              <label className="label" htmlFor="email">Email</label>
+              <label className="label" htmlFor="email">Email address</label>
               <div className="relative">
                 <Mail size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
                   id="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="you@meridianfm.com"
+                  placeholder="name@company.com"
                   className="input pl-9"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -97,24 +97,24 @@ export const LoginPage: React.FC = () => {
 
             <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
               <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
-              Remember me
+              Remember this device
             </label>
 
             {error && <p className="rounded-lg bg-rose-50 dark:bg-rose-900/20 px-3 py-2 text-sm text-rose-600 dark:text-rose-300">{error}</p>}
 
             <button type="submit" className="btn-primary mt-1 w-full justify-center py-2.5" disabled={isLoading}>
-              {isLoading ? 'Connecting to live server…' : 'Log in'} <ArrowRight size={15} />
+              {isLoading ? 'Authenticating…' : 'Sign in'} <ArrowRight size={15} />
             </button>
             {isLoading && (
               <p className="mt-2 text-center text-xs text-amber-600 dark:text-amber-400 animate-pulse">
-                Waking up live Render backend service… (Cold start takes ~45 seconds on first request)
+                Initializing live backend service connection…
               </p>
             )}
           </form>
 
           <div className="mt-5 rounded-lg border border-indigo-100 bg-indigo-50/50 dark:border-indigo-900/50 dark:bg-indigo-900/20 p-4 text-xs text-slate-600 dark:text-slate-300">
-            <p className="font-semibold text-indigo-900 dark:text-indigo-100 mb-1">Live Database Credentials</p>
-            <p className="mb-2 text-slate-500">Click any user below to autofill email & password:</p>
+            <p className="font-semibold text-indigo-900 dark:text-indigo-100 mb-1">Quick Access Accounts</p>
+            <p className="mb-2 text-slate-500">Select any role below to pre-fill credentials:</p>
             <div className="space-y-2 font-medium">
               <div className="rounded border border-indigo-200/60 p-2 dark:border-indigo-800/40 bg-white/60 dark:bg-slate-900/40">
                 <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Seeded Database Users (Password: <code className="bg-slate-200 dark:bg-slate-800 px-1 py-0.5 rounded">Password123!</code>)</p>

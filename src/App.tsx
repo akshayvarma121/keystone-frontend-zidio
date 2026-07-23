@@ -20,15 +20,15 @@ import { useAuth } from './context/AuthContext';
 import { useTheme } from './context/ThemeContext';
 
 const VIEW_TITLES: Record<ViewKey, { title: string; sub: string }> = {
-  dashboard: { title: 'Dashboard', sub: 'Live SLA compliance and operations overview' },
-  kanban: { title: 'Work Orders', sub: 'Filter by status and drag jobs across the pipeline as they progress' },
-  dispatch: { title: 'Dispatch', sub: 'Assign technicians to open work' },
-  customers: { title: 'Customers & Sites', sub: 'Manage accounts and mapped facilities' },
-  reports: { title: 'Reports', sub: 'Performance and cost analytics' },
-  technician: { title: 'My Jobs', sub: 'Assigned work for today' },
-  'customer-portal': { title: 'Service Requests', sub: 'Track and raise facility requests' },
-  settings: { title: 'Settings', sub: 'Platform preferences' },
-  profile: { title: 'Profile', sub: 'Your account details and access level' },
+  dashboard: { title: 'Operational Overview', sub: 'Real-time performance metrics, SLA compliance tracking, and active work orders' },
+  kanban: { title: 'Work Order Management', sub: 'Track, filter, and transition field service jobs through active lifecycle stages' },
+  dispatch: { title: 'Dispatch & Scheduling', sub: 'Match open work orders with qualified technicians based on skills and availability' },
+  customers: { title: 'Customer Accounts & Facilities', sub: 'Manage enterprise client accounts, location records, and site contacts' },
+  reports: { title: 'Analytics & Insights', sub: 'Operational performance reports, SLA trends, and resource utilization metrics' },
+  technician: { title: 'Technician Workspace', sub: 'Review active field assignments, log job progress, and record time entries' },
+  'customer-portal': { title: 'Customer Service Portal', sub: 'Submit new maintenance requests and monitor the resolution status of active tickets' },
+  settings: { title: 'Platform Preferences', sub: 'Customize system options, notification defaults, and application themes' },
+  profile: { title: 'Account Profile', sub: 'Manage user credentials, role authorizations, and personal preferences' },
 };
 
 const SettingsView: React.FC = () => {
