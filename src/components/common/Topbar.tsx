@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Moon, Sun, ChevronDown, Menu, Bell, LogOut } from 'lucide-react';
+import { Moon, Sun, Menu, Bell, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -27,17 +27,14 @@ const KeystoneMark: React.FC = () => (
 );
 
 export const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) => {
-  const { user, switchRole, isLoading, logout } = useAuth();
+  const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
-  const [roleMenuOpen, setRoleMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setRoleMenuOpen(false);
       if (notifRef.current && !notifRef.current.contains(e.target as Node)) setNotifOpen(false);
     }
     document.addEventListener('mousedown', handleClick);
@@ -63,38 +60,6 @@ export const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) 
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* Role switcher — preview any of the 4 roles */}
-        <div className="relative" ref={menuRef}>
-          <button
-            onClick={() => setRoleMenuOpen((o) => !o)}
-            disabled={isLoading}
-            className="flex items-center gap-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-60"
-          >
-            <span className="hidden md:inline text-xs text-slate-400">Viewing as</span>
-            <span>{ROLE_LABELS[user.role]}</span>
-            <ChevronDown size={14} className={`transition-transform ${roleMenuOpen ? 'rotate-180' : ''}`} />
-          </button>
-          {roleMenuOpen && (
-            <div className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-softer animate-fade-in">
-              {(Object.keys(ROLE_LABELS) as Role[]).map((role) => (
-                <button
-                  key={role}
-                  onClick={() => {
-                    switchRole(role);
-                    setRoleMenuOpen(false);
-                  }}
-                  className={`flex w-full items-center justify-between px-3.5 py-2.5 text-left text-sm transition-colors ${
-                    role === user.role
-                      ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 font-medium'
-                      : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  {ROLE_LABELS[role]}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
 
         <button
           onClick={toggleTheme}
