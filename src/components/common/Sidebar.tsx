@@ -9,6 +9,7 @@ import {
   ClipboardList,
   Settings,
   UserCircle,
+  BookOpen,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import type { Role } from '../../types';
@@ -21,6 +22,7 @@ export type ViewKey =
   | 'reports'
   | 'technician'
   | 'customer-portal'
+  | 'guide'
   | 'settings'
   | 'profile';
 
@@ -41,6 +43,7 @@ const NAV_BY_ROLE: Record<Role, NavItem[]> = {
     { key: 'dispatch', label: 'Dispatch', icon: <Wrench size={18} /> },
     { key: 'customers', label: 'Customers & Sites', icon: <Building2 size={18} /> },
     { key: 'reports', label: 'Reports', icon: <BarChart3 size={18} /> },
+    { key: 'guide', label: 'User Guide', icon: <BookOpen size={18} /> },
     { key: 'settings', label: 'Settings', icon: <Settings size={18} /> },
     { key: 'profile', label: 'Profile', icon: <UserCircle size={18} /> },
   ],
@@ -49,14 +52,17 @@ const NAV_BY_ROLE: Record<Role, NavItem[]> = {
     { key: 'kanban', label: 'Work Orders', icon: <KanbanSquare size={18} /> },
     { key: 'dispatch', label: 'Dispatch', icon: <Wrench size={18} /> },
     { key: 'customers', label: 'Customers & Sites', icon: <Building2 size={18} /> },
+    { key: 'guide', label: 'User Guide', icon: <BookOpen size={18} /> },
     { key: 'profile', label: 'Profile', icon: <UserCircle size={18} /> },
   ],
   TECHNICIAN: [
     { key: 'technician', label: 'My Jobs', icon: <ClipboardList size={18} /> },
+    { key: 'guide', label: 'User Guide', icon: <BookOpen size={18} /> },
     { key: 'profile', label: 'Profile', icon: <UserCircle size={18} /> },
   ],
   CUSTOMER: [
     { key: 'customer-portal', label: 'Service Requests', icon: <Users2 size={18} /> },
+    { key: 'guide', label: 'User Guide', icon: <BookOpen size={18} /> },
     { key: 'profile', label: 'Profile', icon: <UserCircle size={18} /> },
   ],
 };

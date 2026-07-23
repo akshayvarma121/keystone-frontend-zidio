@@ -10,6 +10,7 @@ import { TechnicianMobileView } from './components/technician/TechnicianMobileVi
 import { CustomerPortalView } from './components/customer/CustomerPortalView';
 import { CustomerSiteManager } from './components/customers/CustomerSiteManager';
 import { ReportsView } from './components/reports/ReportsView';
+import { GuideView } from './components/guide/GuideView';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
@@ -27,6 +28,7 @@ const VIEW_TITLES: Record<ViewKey, { title: string; sub: string }> = {
   reports: { title: 'Analytics & Insights', sub: 'Operational performance reports, SLA trends, and resource utilization metrics' },
   technician: { title: 'Technician Workspace', sub: 'Review active field assignments, log job progress, and record time entries' },
   'customer-portal': { title: 'Customer Service Portal', sub: 'Submit new maintenance requests and monitor the resolution status of active tickets' },
+  guide: { title: 'User Guide & Documentation', sub: 'Operations manual, role permissions, and step-by-step feature walkthroughs' },
   settings: { title: 'Platform Preferences', sub: 'Customize system options, notification defaults, and application themes' },
   profile: { title: 'Account Profile', sub: 'Manage user credentials, role authorizations, and personal preferences' },
 };
@@ -111,6 +113,7 @@ const AppShell: React.FC = () => {
             {allowed && view === 'reports' && <ReportsView />}
             {allowed && view === 'technician' && <TechnicianMobileView />}
             {allowed && view === 'customer-portal' && <CustomerPortalView />}
+            {allowed && view === 'guide' && <GuideView />}
             {allowed && view === 'settings' && <SettingsView />}
             {allowed && view === 'profile' && <ProfilePage />}
           </div>
