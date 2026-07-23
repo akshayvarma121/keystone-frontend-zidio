@@ -41,7 +41,7 @@ export const LoginPage: React.FC = () => {
           <KeystoneMark />
           <div className="text-left">
             <p className="font-display text-base font-bold leading-tight text-slate-900 dark:text-slate-50">Keystone</p>
-            <p className="text-[11px] leading-tight text-slate-400">Meridian Facilities Management</p>
+            <p className="text-[11px] leading-tight text-slate-400">Field Service Platform</p>
           </div>
         </Link>
 
