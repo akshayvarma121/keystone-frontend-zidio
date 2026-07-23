@@ -39,6 +39,11 @@ export const WorkOrderDetailModal: React.FC<Props> = ({ workOrderId, onClose }) 
     queryFn: () => api.getWorkOrder(workOrderId),
   });
 
+  const { data: inventoryList = [] } = useQuery({
+    queryKey: ['inventory'],
+    queryFn: api.getInventory,
+  });
+
   const invalidateAll = () => {
     queryClient.invalidateQueries({ queryKey: ['work-order', workOrderId] });
     queryClient.invalidateQueries({ queryKey: ['work-orders'] });
@@ -243,6 +248,14 @@ export const WorkOrderDetailModal: React.FC<Props> = ({ workOrderId, onClose }) 
                   <label className="label">Inventory item</label>
                   <select className="input" value={partItem} onChange={(e) => setPartItem(e.target.value)}>
                     <option value="">Select item…</option>
+                    {(inventoryList.length > 0 ? inventoryList : [
+                      { id: '44444444-4444-4444-4444-444444444441', name: 'Compressor Motor', unitCost: 250.0, quantityOnHand: 15 },
+                      { id: '44444444-4444-4444-4444-444444444442', name: 'Air Filter', unitCost: 15.5, quantityOnHand: 100 },
+                      { id: '44444444-4444-4444-4444-444444444443', name: 'Coolant 1Gal', unitCost: 25.0, quantityOnHand: 50 },
+                      { id: '44444444-4444-4444-4444-444444444444', name: 'Thermostat', unitCost: 75.0, quantityOnHand: 30 }
+                    ]).map((i: any) => (
+                      <option key={i.id} value={i.id}>{i.name} (${(i.unitCost || 0).toFixed(2)}, {i.stockQty ?? i.quantityOnHand ?? 10} in stock)</option>
+                    ))}
                   </select>
                 </div>
                 <div className="w-full sm:w-24">

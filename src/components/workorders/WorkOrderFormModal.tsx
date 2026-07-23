@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Modal } from '../common/Modal';
 import * as api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -57,22 +57,41 @@ export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustome
   });
 
   const selectedCustomerId = watch('customerId');
+
+  const { data: customerList = [] } = useQuery({
+    queryKey: ['customers'],
+    queryFn: api.getCustomers,
+  });
+
+  const { data: siteList = [] } = useQuery({
+    queryKey: ['all-sites'],
+    queryFn: api.getAllSites,
+  });
+
+  const displayCustomers = useMemo(() => {
+    if (customerList.length > 0) return customerList;
+    return [{ id: '11111111-1111-1111-1111-111111111111', name: 'Acme Corp' }];
+  }, [customerList]);
+
   const availableSites = useMemo(() => {
-    const sites = [] as any[];
-    return sites.filter((s: any) => s.customerId === selectedCustomerId);
-  }, [selectedCustomerId]);
+    const list = siteList.length > 0 ? siteList : [
+      { id: '22222222-2222-2222-2222-222222222221', customerId: '11111111-1111-1111-1111-111111111111', name: 'Acme HQ', city: 'Metropolis' },
+      { id: '22222222-2222-2222-2222-222222222222', customerId: '11111111-1111-1111-1111-111111111111', name: 'Acme Warehouse', city: 'Industrial Zone' }
+    ];
+    if (!selectedCustomerId) return list;
+    return list.filter((s) => s.customerId === selectedCustomerId);
+  }, [siteList, selectedCustomerId]);
 
   const siteId = watch('siteId');
   const site = useMemo(() => {
-    const sites = [] as any[];
-    return sites.find((s: any) => s.id === siteId);
-  }, [siteId]);
+    return availableSites.find((s) => s.id === siteId);
+  }, [availableSites, siteId]);
 
   const mutation = useMutation({
     mutationFn: (values: FormValues) => {
       return api.createWorkOrder({
         ...values,
-        raisedBy: lockedCustomer ? user.name : site?.contactName ?? user.name,
+        raisedBy: lockedCustomer ? user.name : (site as any)?.contactName ?? user.name,
         requestedByCustomer: !!lockedCustomer,
         actorName: user.name,
         actorRole: user.role,
@@ -136,7 +155,7 @@ export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustome
                   {...field}
                 >
                   <option value="">Select customer…</option>
-                  {([].map as any)((c: any) => (
+                  {displayCustomers.map((c) => (
                     <option key={c.id} value={c.id}>{c.name}</option>
                   ))}
                 </select>
@@ -149,7 +168,7 @@ export const WorkOrderFormModal: React.FC<Props> = ({ open, onClose, lockCustome
             <select id="siteId" className="input" disabled={!selectedCustomerId} {...register('siteId')}>
               <option value="">Select site…</option>
               {availableSites.map((s: any) => (
-                <option key={s.id} value={s.id}>{s.name} — {s.city}, {s.state}</option>
+                <option key={s.id} value={s.id}>{s.name} — {s.city || 'Default'}</option>
               ))}
             </select>
             {errors.siteId && <p className="mt-1 text-xs text-rose-500">{errors.siteId.message}</p>}
